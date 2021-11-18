@@ -1,0 +1,81 @@
+<div class="container" style="margin-top: 20px;">
+
+  <div class="col col-lg-7 text-center">
+    <p class="display-4">Novo Curso</p>
+  </div>
+
+  <div class="row justify-content-lg-center">
+    <div class="col col-lg-8">
+      <hr />
+    </div>
+  </div>
+
+  <form class="was-validated fundo" method="post" novalidate autocomplete="off" #form="ngForm"
+    (submit)="onSubmit(form)">
+
+    <div class="row justify-content-center">
+
+      <div class="col-md-8 col-lg-8">
+        <!-- Caixa de texto Descrição -->
+        <div class="input-group">
+          <span class="input-group-text">Descrição</span>
+          <textarea class="form-control" name="descricaoAssunto" aria-label="With textarea"
+            [(ngModel)]="service.formData.descricaoAssunto" required></textarea>
+        </div>
+
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-md-2 col-lg-2">
+          <!-- Caixas de Data Início e Fim -->
+          <label class="control-label">Data Início</label>
+          <input type="date" name="dataInicio" [(ngModel)]="service.formData.dataInicio" required />
+        </div>
+
+        <div class="col-md-2 col-lg-2">
+          <label class="control-label">Data Fim</label>
+          <input type="date" name="dataFim" [(ngModel)]="service.formData.dataFim" required />
+        </div>
+
+      </div>
+
+      <div class="row justify-content-center">
+
+        <div class="col-md-6 col-lg-6">
+          <label class="control-label">Categoria</label>
+          <!-- ComboBox -->
+          <select class="form-select" aria-label="Categoria" name="categoriaID" id="cmbCategorias"
+            [(ngModel)]="service.formData.categoriaID" required>
+            <option value="0">Nenhum selecionado</option>
+            <option *ngFor="let categoria of service.listCategoria" value="{{categoria.categoriaID}}">
+              {{categoria.categoriaNome}}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-2 col-lg-2">
+          <!-- Caixa Quantidade de Alunos -->
+          <label for="quantidade" class="form-label">Quantidade de Alunos</label>
+          <input aria-label="quantidade" name="qtdAlunos" type="number" class="form-control form-control-sm"
+            id="qtdAlunos" placeholder="" value="" name="dataInicio" [(ngModel)]="service.formData.qtdAlunos" />
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row justify-content-lg-center">
+      <div class="col-8 col-md-8">
+        <div class="form-group">
+          <br />
+          <button type="button" class="btn btn-outline-success" type="submit">Salvar</button>
+          <button id="voltarLista" class="btn btn-outline-warning" routerLink="/app-curso-list" type="button">Voltar</button>
+        </div>
+      </div>
+    </div>
+
+
+
+  </form>
+
+</div>
