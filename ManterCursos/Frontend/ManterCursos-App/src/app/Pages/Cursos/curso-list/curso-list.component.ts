@@ -39,5 +39,3 @@ export class CursoListComponent implements OnInit {
     this.service.formData = Object.assign({}, curso)
   }
 }
-
-

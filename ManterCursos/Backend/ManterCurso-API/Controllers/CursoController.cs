@@ -22,6 +22,11 @@ namespace ManterCurso_API.Controllers
             _context = context;
         }
 
+        private bool CursoExists(int id)
+        {
+            return _context.Cursos.Any(cur => cur.CursoID == id);
+        }
+
         [HttpGet]
         public IEnumerable<dynamic> GetCursos()
         {
@@ -68,6 +73,39 @@ namespace ManterCurso_API.Controllers
 
             _context.Cursos.Remove(curso);
             await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAutor(int id, Curso curso)
+        {
+            if (id != curso.CursoID)
+            {
+                return BadRequest("ID do parâmetro diferente do ID do FormData");
+            }
+
+            if(!CursoExists(id)){
+                return NotFound("O Curso de ID informado não existe");
+            }
+
+            _context.Entry(curso).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CursoExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return NoContent();
         }

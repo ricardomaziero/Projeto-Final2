@@ -32,7 +32,7 @@ export class CursoEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     console.log(this.service.formData);
-    this.service.postCurso().subscribe(
+    this.service.putCurso().subscribe(
       response => {
         this.resetForm(form);
 
